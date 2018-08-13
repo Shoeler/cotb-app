@@ -1,0 +1,22 @@
+{
+  "id": "6d52232f-5911-4906-bcee-a1f4bd567ef6",
+  "name": "cotb-app-aks",
+  "values": [
+    {
+      "key": "cotb-hostname",
+      "value": "cotb-app.eastus.cloudapp.azure.com",
+      "description": "",
+      "enabled": true
+    },
+    {
+      "key": "cotb-port",
+      "value": "80",
+      "description": "",
+      "type": "text",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-08-03T13:23:16.526Z",
+  "_postman_exported_using": "Postman/6.2.2"
+}

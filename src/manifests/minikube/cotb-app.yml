@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  type: NodePort
+  selector:
+    app: server
+  ports:
+  - name: server
+    protocol: TCP
+    port: 32178
+    targetPort: 32178
+    nodePort: 32178
+  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server
+        image: 127.0.0.1:30400/server:latest
+        env:
+          - name: PORT
+            value: "32178"
+        ports:
+        - containerPort: 32178
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emulator
+  labels:
+    app: emulator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emulator
+  template:
+    metadata:
+      labels:
+        app: emulator
+    spec:
+      containers:
+      - name: emulator
+        image: 127.0.0.1:30400/emulator:latest
+        ports:
+        - containerPort: 8080

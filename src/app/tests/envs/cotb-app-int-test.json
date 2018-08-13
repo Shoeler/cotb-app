@@ -1,0 +1,21 @@
+{
+  "id": "d031831b-2323-44be-9f03-94fb7faa3e38",
+  "name": "cotb-app-int-test",
+  "values": [
+    {
+      "key": "cotb-hostname",
+      "value": "server-internal.test.svc.cluster.local",
+      "description": "",
+      "enabled": true
+    },
+    {
+      "key": "cotb-port",
+      "value": "8080",
+      "description": "",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-08-06T13:55:16.911Z",
+  "_postman_exported_using": "Postman/6.2.3"
+}

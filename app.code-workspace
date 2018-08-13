@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "src/app",
+			"name": "COTB Application"
+		},
+		{
+			"path": "src/app/tests",
+			"name": "Integration Tests"
+		},
+		{
+			"path": "src/manifests",
+			"name": "Kubernetes Manifests"
+		},
+		{
+			"path": "src/scripts",
+			"name": "Infrastructure Scripts"
+		},
+		{
+			"path": "examples",
+			"name": "Examples"
+		}
+	],
+	"settings": {}
+}

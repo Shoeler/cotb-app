@@ -1,0 +1,17 @@
+{
+  "grill": {
+    "host": "255.255.255.255",
+    "port": 8080,
+    "tries": 5
+  },
+  "status": {
+    "pollingInterval": 1000
+  },
+  "alerts": {
+    "slack": {
+      "webhookUrl": "https://hooks.slack.com/services/SOME-SLACK-WEBHOOK-ID-HERE",
+      "channel": "#alerts",
+      "username": "grill-bot"
+    }
+  }
+}

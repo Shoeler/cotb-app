@@ -1,0 +1,89 @@
+   node {
+
+    checkout scm
+
+    env.DOCKER_API_VERSION = "1.23"
+    registryHost = "127.0.0.1:30400"
+    manifestDir = "src/manifests/azure"
+    emulator_img = "${registryHost}/emulator"
+    server_img = "${registryHost}/server"
+    tests_img = "${registryHost}/tests"
+
+    println "#### Parsing release tag from commit ####"
+    sh "git rev-parse --short HEAD > commit-id"
+    tag = readFile('commit-id').replace("\n", "").replace("\r", "")
+
+    stage('Build Images') {
+        println "#### Building Kubernetes deployment YAML ####"
+        old_emu_img = emulator_img.replace(".", "\\.") + ":latest"
+        new_emu_img = emulator_img.replace(".", "\\.") + ":${tag}"
+        old_svr_img = server_img.replace(".", "\\.") + ":latest"
+        new_svr_img = server_img.replace(".", "\\.") + ":${tag}"
+
+        sh "sed 's#${old_emu_img}#${new_emu_img}#; s#${old_svr_img}#${new_svr_img}#' ${manifestDir}/cotb-app.yml > ${manifestDir}/cotb-app-${tag}.yml"
+        sh "cat ${manifestDir}/cotb-app-${tag}.yml"
+
+        println "#### Building application images ####"
+        sh "docker build -t ${emulator_img}:${tag} -t ${emulator_img}:latest -f src/app/emulator/Dockerfile src/app/emulator"
+        sh "docker build -t ${server_img}:${tag} -t ${server_img}:latest -f src/app/server/Dockerfile src/app/server"
+        sh "docker build -t ${tests_img}:${tag} -t ${tests_img}:latest -f src/app/tests/Dockerfile src/app/tests"
+    }
+
+    stage('Exec Unit Tests') {
+        println "#### Executing unit tests against all images ####"
+        sh "docker run -i --entrypoint=npm ${server_img} run test"
+        sh "docker run -i --entrypoint=dotnet ${emulator_img} test ../../cotb-emulator-tests"
+    }
+
+    stage('Push Images To Registry') {
+        println "#### Pushing all new images with release tag ${tag} ####"
+        sh "docker push ${emulator_img}:${tag}"
+        sh "docker push ${emulator_img}:latest"
+
+        sh "docker push ${server_img}:${tag}"
+        sh "docker push ${server_img}:latest"
+
+        sh "docker push ${tests_img}:${tag}"
+        sh "docker push ${tests_img}:latest"
+    }
+
+    stage('Deploy Integration Environment') {
+        println "#### Deploying integration environment ####"
+        sh "kubectl apply --overwrite=true --force=true -f ${manifestDir}/cotb-app-${tag}.yml --namespace=test"
+        sh "kubectl rollout status deployment/emulator --namespace=test"
+        sh "kubectl rollout status deployment/server --namespace=test"
+
+        // Note: Native "sh" call not compatible with kubectl run. Use process call instead.
+        try {
+            println "#### Executing integration tests ####"
+            def cmd = "kubectl run tests --image=${tests_img}:${tag} --quiet --rm --restart=Never --stdin --namespace=test -- run collections/cotb-app.json --environment envs/cotb-app-int-test.json --timeout-request 20000"
+            def sout = new StringBuffer()
+            def serr = new StringBuffer()
+            println cmd
+
+            def proc = cmd.execute()
+            proc.consumeProcessOutput(sout, serr)
+            proc.waitForOrKill(30000)
+            println sout
+            println serr
+
+            // If integration tests fail, forcefully remove the deploy and fail the build
+            if (proc.exitValue()) {
+                currentBuild.result = 'ABORTED'
+                error("Non zero exit code returned from command!")
+            }
+        } finally {
+            println "#### Tearing down integration environment ####"
+            sh "kubectl delete --now=true po tests --namespace=test || true"
+            sh "kubectl delete --now=true deploy tests --namespace=test || true"
+            sh "kubectl delete --now=true -f ${manifestDir}/cotb-app-${tag}.yml --namespace=test || true"
+        }
+    }
+
+    stage('Deploy Production Environment') {
+        println "#### Deploying Production with phased rollout ####"
+        sh "kubectl apply -f ${manifestDir}/cotb-app-${tag}.yml && kubectl apply -f ${manifestDir}/cotb-app-public-svc.yml"
+        sh "kubectl rollout status deployment/emulator"
+        sh "kubectl rollout status deployment/server"
+    }
+}

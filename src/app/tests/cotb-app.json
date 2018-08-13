@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "e6203358-ec74-43dc-ac1b-a3d227cf94a5",
+		"name": "cotb-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "0aad0208-d247-4bd5-8dac-731c6276de53",
+			"name": "Power On",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "27bdbf52-f180-4398-b9ee-ad6204281900",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{cotb-hostname}}:{{cotb-port}}/api/poweron",
+					"protocol": "http",
+					"host": [
+						"{{cotb-hostname}}"
+					],
+					"port": "{{cotb-port}}",
+					"path": [
+						"api",
+						"poweron"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "115eb446-091f-4a49-9f62-a9bd5db79717",
+			"name": "Power Off",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9bc97ceb-9ca4-4101-b592-b0fbb3cc1679",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{cotb-hostname}}:{{cotb-port}}/api/poweroff",
+					"protocol": "http",
+					"host": [
+						"{{cotb-hostname}}"
+					],
+					"port": "{{cotb-port}}",
+					"path": [
+						"api",
+						"poweroff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "18c4c0c5-189d-4a9d-a6f8-0cc904871fa7",
+			"name": "Power Toggle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afc687c4-26c5-40cb-b8f2-920b9d2b42f6",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{cotb-hostname}}:{{cotb-port}}/api/powertoggle",
+					"protocol": "http",
+					"host": [
+						"{{cotb-hostname}}"
+					],
+					"port": "{{cotb-port}}",
+					"path": [
+						"api",
+						"powertoggle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "8528f86f-02f0-4574-a097-77b14b305827",
+			"name": "Set Grill Temp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3bccf43-67ec-400d-9cc1-0cc840fd836d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{cotb-hostname}}:{{cotb-port}}/api//temperature/grill/200",
+					"protocol": "http",
+					"host": [
+						"{{cotb-hostname}}"
+					],
+					"port": "{{cotb-port}}",
+					"path": [
+						"api",
+						"",
+						"temperature",
+						"grill",
+						"200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "807a4519-6e4a-41d2-b185-d433b974f9e9",
+			"name": "Set Food Temp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a8b3591e-7ec5-41e5-bcda-1348b472efe3",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e8f033d5-18e0-434e-8e05-68e4a9cc3542",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{cotb-hostname}}:{{cotb-port}}/api//temperature/food/200",
+					"protocol": "http",
+					"host": [
+						"{{cotb-hostname}}"
+					],
+					"port": "{{cotb-port}}",
+					"path": [
+						"api",
+						"",
+						"temperature",
+						"food",
+						"200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "aaa8353f-3cc3-42f1-a176-d83cf4aa4adb",
+			"name": "Get Grill Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3550197c-6ff1-417a-a845-ff9e453545b6",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"var schema = {",
+							"  $id: \"cotb-app-get-payload\",",
+							"  $schema: \"http://json-schema.org/draft-07/schema#\",",
+							"  type: \"object\",",
+							"  properties: {",
+							"    state: {",
+							"      type: \"string\",",
+							"      enum: [\"on\", \"off\"]",
+							"    },",
+							"    _hex: {",
+							"      type: \"string\"",
+							"    },",
+							"    isOn: {",
+							"      type: \"boolean\"",
+							"    },",
+							"    currentGrillTemp: {",
+							"      type: \"integer\"",
+							"    },",
+							"    desiredGrillTemp: {",
+							"      type: \"integer\"",
+							"    },",
+							"    currentFoodTemp: {",
+							"      type: \"integer\"",
+							"    },",
+							"    desiredFoodTemp: {",
+							"      type: \"integer\"",
+							"    },",
+							"    fanModeActive: {",
+							"      type: \"boolean\"",
+							"    },",
+							"    lowPelletAlarmActive: {",
+							"      type: \"boolean\"",
+							"    },",
+							"  },",
+							"  required: [ ",
+							"      \"state\", ",
+							"      \"isOn\", ",
+							"      \"currentGrillTemp\", ",
+							"      \"desiredGrillTemp\",",
+							"      \"currentFoodTemp\",",
+							"      \"desiredFoodTemp\",",
+							"      \"fanModeActive\",",
+							"      \"lowPelletAlarmActive\"",
+							"  ]",
+							"};",
+							"",
+							"pm.test('Schema is valid', function() {",
+							"  var body = pm.response.json();",
+							"  pm.expect(tv4.validate(body, schema)).to.be.true;",
+							"});",
+							"",
+							"pm.test('Body values are valid', function() {",
+							"  var body = pm.response.json();",
+							"  pm.expect(body.currentGrillTemp, 200);",
+							"  pm.expect(body.desiredGrillTemp, 200);",
+							"  pm.expect(body.currentFoodTemp, 200);",
+							"  pm.expect(body.desiredFoodTemp, 200);",
+							"  pm.expect(body.fanModeActive, false);",
+							"  pm.expect(body.lowPelletAlarmActive, false);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{cotb-hostname}}:{{cotb-port}}/api/status",
+					"protocol": "http",
+					"host": [
+						"{{cotb-hostname}}"
+					],
+					"port": "{{cotb-port}}",
+					"path": [
+						"api",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

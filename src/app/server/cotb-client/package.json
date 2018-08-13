@@ -1,0 +1,11 @@
+{
+  "name": "cotb-client",
+  "version": "1.0.0",
+  "description": "Sick Grillz API client",
+  "main": "index.js",
+  "author": "Jp Dienst",
+  "license": "ISC",
+  "dependencies": {
+    "ip": "^1.1.5"
+  }
+}

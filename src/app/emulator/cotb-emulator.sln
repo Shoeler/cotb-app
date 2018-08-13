@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cotb-emulator", "cotb-emulator\cotb-emulator.csproj", "{6460ECB9-DF11-4416-AF7A-4296FF58784A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cotb-emulator-tests", "cotb-emulator-tests\cotb-emulator-tests.csproj", "{AF57C3EB-AA05-4C2E-8329-D2B11E8AD09E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6460ECB9-DF11-4416-AF7A-4296FF58784A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6460ECB9-DF11-4416-AF7A-4296FF58784A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6460ECB9-DF11-4416-AF7A-4296FF58784A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6460ECB9-DF11-4416-AF7A-4296FF58784A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF57C3EB-AA05-4C2E-8329-D2B11E8AD09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF57C3EB-AA05-4C2E-8329-D2B11E8AD09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF57C3EB-AA05-4C2E-8329-D2B11E8AD09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF57C3EB-AA05-4C2E-8329-D2B11E8AD09E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
