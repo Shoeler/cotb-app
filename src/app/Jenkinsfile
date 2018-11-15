@@ -74,9 +74,9 @@
             }
         } finally {
             println "#### Tearing down integration environment ####"
-            sh "kubectl delete --now=true po tests --namespace=test || true"
-            sh "kubectl delete --now=true deploy tests --namespace=test || true"
-            sh "kubectl delete --now=true -f ${manifestDir}/cotb-app-${tag}.yml --namespace=test || true"
+            sh "kubectl delete --now=true po tests --namespace=test" || true
+            sh "kubectl delete --now=true deploy tests --namespace=test" || true
+            sh "kubectl delete --now=true -f ${manifestDir}/cotb-app-${tag}.yml --namespace=test" || true
         }
     }
 
