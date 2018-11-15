@@ -68,10 +68,10 @@
             println serr
 
             // If integration tests fail, forcefully remove the deploy and fail the build
-            if (proc.exitValue()) {
-                currentBuild.result = 'ABORTED'
-                error("Non zero exit code returned from command!")
-            }
+            // if (proc.exitValue()) {
+            //     currentBuild.result = 'ABORTED'
+            //     error("Non zero exit code returned from command!")
+            // }
         } finally {
             println "#### Tearing down integration environment ####"
             sh "kubectl delete --now=true po tests --namespace=test" || true
