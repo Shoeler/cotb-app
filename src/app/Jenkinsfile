@@ -56,7 +56,7 @@
         // Note: Native "sh" call not compatible with kubectl run. Use process call instead.
         try {
             println "#### Executing integration tests ####"
-            def cmd = "kubectl run tests --image=${tests_img}:${tag} --quiet --rm --restart=Never --stdin --namespace=test -- run collections/cotb-app.json --environment envs/cotb-app-int-test.json --timeout-request 20000"
+            def cmd = "kubectl run tests --image=${tests_img}:${tag} --quiet --restart=Never --stdin --wait --tty --namespace=test -- run collections/cotb-app.json --environment envs/cotb-app-int-test.json --timeout-request 20000"
             def sout = new StringBuffer()
             def serr = new StringBuffer()
             println cmd
