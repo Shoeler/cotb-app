@@ -8,8 +8,8 @@ router.get('/status', async (req, res, next) => {
   try {
     const client = clientFactory.createClient()
     const result = await client.getGrillStatus()
-    res.json({ ...result, isOn: result.isOn ? 'yes' : 'no' }) // hint!
-    // res.json(result)
+    // res.json({ ...result, isOn: result.isOn ? 'yes' : 'no' }) // hint!
+     res.json(result)
   } catch (err) {
     if (err instanceof errors.InvalidCommand) res.status(400).send(err.message)
     else next(err)
